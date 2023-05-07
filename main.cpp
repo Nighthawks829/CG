@@ -13,12 +13,18 @@
 #include "drawWitch.cpp"
 #include "drawBroom.cpp"
 #include "drawHorse.cpp"
+#include "drawPrincess.cpp"
+#include "drawKangaroo.cpp"
 
 #define SCREENWIDTH 500
 #define SCREENHEIGHT 500
 #define PI 3.1415926535897932384626433832795
 #define FPS 60
 
+float kangarooInitX = 100;
+float kangarooInitY = 0;
+float dx = 5;
+float dy = 5;
 
 void drawBackground()
 {
@@ -30,9 +36,12 @@ void drawBackground()
 
     drawTree(100, 250, 0.5);
 
+    drawPrincess(130, 150, 0.5);
     drawHouse(220, 50, 1.1);
 
-    drawHorse(30, 30, 1);
+    drawHorse(200, 0.6*SCREENHEIGHT, 0.5);
+
+    drawKangaroo(kangarooInitX, kangarooInitY, 0.5);
 }
 void display()
 {
@@ -64,6 +73,23 @@ void initGL()
     glClearColor(0.0, 0.0, 0.0, 0.0);
 }
 
+void idle()
+{
+    DWORD start = GetTickCount();
+    while (GetTickCount() - start < 1000 / FPS)
+        ;
+    kangarooInitX += dx;
+    dy = dy + 0.15;
+    kangarooInitY = pow(10 * sin(dy), 2);
+
+    if (kangarooInitX < 0 || kangarooInitX > SCREENWIDTH)
+        dx *= -1;
+    // if (kangarooInitY < 0 || kangarooInitY > SCREENHEIGHT)
+    //     dy *= -1;
+
+    glutPostRedisplay();
+}
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
@@ -72,7 +98,7 @@ int main(int argc, char **argv)
     glutCreateWindow("Test Window");
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
-    // glutIdleFunc(idle);
+    glutIdleFunc(idle);
     initGL();
     glutMainLoop();
 }
