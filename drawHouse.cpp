@@ -11,6 +11,7 @@
 #define PI 3.1415926535897932384626433832795
 #define FPS 60
 
+
 void drawHouse(double X, double Y, double scale)
 {
     double scaleX = 250;
@@ -56,3 +57,4 @@ void drawHouse(double X, double Y, double scale)
     glColor3ub(225, 235, 227);
     glRectf(X + 0.4 * scaleX, Y + 0.2 * scaleY, X + 0.9 * scaleX, Y + 0.35 * scaleY);
 }
+

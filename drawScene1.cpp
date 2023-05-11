@@ -5,18 +5,12 @@
 #include <windows.h>
 #include <math.h>
 #include <cmath>
-#include "drawSun.cpp"
-
 #define SCREENWIDTH 500
 #define SCREENHEIGHT 500
 #define PI 3.1415926535897932384626433832795
 #define FPS 60
 
-void drawSky(float dx,float dy)
-{
-    glColor3ub(135, 206, 235);
-    glRectf(0, 0.6 * SCREENHEIGHT, SCREENWIDTH, SCREENHEIGHT);
-    drawSun(20, 450, 50, 300);
-}
-
-
+// void drawScene1()
+// {
+//     gl
+// }

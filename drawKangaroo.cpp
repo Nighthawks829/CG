@@ -6,6 +6,8 @@
 #include <math.h>
 #include <cmath>
 
+void drawKangarooInverse(double X, double Y, double scale);
+
 void drawEllipse(double centerX, double centerY, double radiusX, double radiusY, int numVertices)
 {
     glBegin(GL_TRIANGLE_FAN);
@@ -23,13 +25,19 @@ void drawEllipse(double centerX, double centerY, double radiusX, double radiusY,
     glEnd();
 }
 
-void drawKangaroo(double X, double Y, double scale)
+void drawKangaroo(double X, double Y, double scale, int rot)
 {
     double scaleX = 300;
     double scaleY = 250;
 
     scaleX *= scale;
     scaleY *= scale;
+
+    if (rot == -1)
+    {
+        drawKangarooInverse(X, Y, scale);
+        return;
+    }
 
     // boder
     // glColor3ub(0, 0, 0);
@@ -169,4 +177,153 @@ void drawKangaroo(double X, double Y, double scale)
     glRectf(0, 0, 0.25 * scaleX, 0.05 * scaleY);
     glPopMatrix();
     // End left ear
+}
+
+void drawKangarooInverse(double X, double Y, double scale)
+{
+    double scaleX = 300;
+    double scaleY = 250;
+
+    scaleX = scaleX * scale;
+    scaleY = scaleY * scale;
+
+    // boder
+    // glColor3ub(0, 0, 0);
+    // glRectf(X, Y, X + scaleX, Y + scaleY);
+    // Start right ear
+    glPushMatrix();
+    glTranslatef(X + 1 - 0.725 * scaleX, Y + 0.8 * scaleY, 0.0);
+    glRotatef(360 - 50, 0, 0, 1);
+    glColor3ub(133, 99, 64);
+    glRectf(1 - 0, 0, 1 - 0.25 * scaleX, 0.03 * scaleY);
+    glPopMatrix();
+    // End right ear
+
+    // Start right leg
+    glPushMatrix();
+    glColor3ub(133, 99, 64);
+    glRectf(X + 1 - 0.60 * scaleX, Y + 0.09 * scaleY, X + 1 - 0.7 * scaleX, Y + 0.3 * scaleY);
+    glPopMatrix();
+    // End left leg
+
+    // Start right feet
+    glPushMatrix();
+    glColor3ub(133, 99, 64);
+    glRectf(X + 1 - 0.6 * scaleX, Y + 0.09 * scaleY, X + 1 - 0.75 * scaleX, Y + 0.14 * scaleY);
+    glPopMatrix();
+    // End right feet
+
+    // Start right hand
+    glPushMatrix();
+    glColor3ub(133, 99, 64);
+    glTranslatef(X + 1 - 0.75 * scaleX, Y + 0.43 * scaleY, 0.0);
+    glRotatef(60, 0, 0, 1);
+    glRectf(1 - 0, 0, 1 - 0.2 * scaleX, 0.03 * scaleX);
+    glPopMatrix();
+    // End right hand
+
+    // Start right paw
+    glPushMatrix();
+    glColor3ub(90, 79, 71);
+    glRectf(X + 1 - 0.75 * scaleX, Y + 0.09 * scaleY, X + 1 - 0.8 * scaleX, Y + 0.14 * scaleY);
+    glPopMatrix();
+    // End right paw
+
+    // Start dummy
+    glPushMatrix();
+    glTranslatef(X + 1 - 0.6 * scaleX, Y + 0.33 * scaleY, 0.0);
+    glRotatef(335, 0, 0, 1);
+    glColor3ub(162, 155, 125);
+    drawEllipse(1 - 0, 1 - 0, 0.15 * scaleX, 0.12 * scaleY, 100);
+    glPopMatrix();
+    // End dummy
+
+    // Start tail
+    glPushMatrix();
+    glColor3ub(145, 113, 76);
+    glRectf(X, Y + 0.2 * scaleY, X + 1 - 0.2 * scaleX, Y + 0.25 * scaleY);
+    glPopMatrix();
+    // End tail
+
+    // Start tail second part
+    glPushMatrix();
+    glTranslatef(X + 1 - 0.2 * scaleX, Y + 0.175 * scaleY, 0.0);
+    glRotatef(340, 0, 0, 1);
+    glRectf(1.0, 0.0, 1 - 0.2 * scaleX, 0.1 * scaleY);
+    // End tail second part
+
+    // Start body
+    glRectf(1 - 0.2 * scaleX, 0 - 0.05 * scaleY, 1 - 0.65 * scaleX, 0.15 * scaleY);
+    // End body
+
+    glPopMatrix();
+    // End tail second part
+
+    // Start left leg
+    glPushMatrix();
+    glColor3ub(133, 99, 64);
+    glRectf(X + 1 - 0.45 * scaleX, Y, X + 1 - 0.55 * scaleX, Y + 0.3 * scaleY);
+    glPopMatrix();
+    // End left leg
+
+    // Start left feet
+    glPushMatrix();
+    glColor3ub(133, 99, 64);
+    glRectf(X + 1 - 0.45 * scaleX, Y, X + 1 - 0.65 * scaleX, Y + 0.05 * scaleY);
+    glPopMatrix();
+    // End left feet
+
+    // Start left paw
+    glPushMatrix();
+    glColor3ub(90, 79, 71);
+    glRectf(X + 1 - 0.65 * scaleX, Y, X + 1 - 0.7 * scaleX, Y + 0.05 * scaleY);
+    glPopMatrix();
+    // End left paw
+
+    // Start neck
+    glPushMatrix();
+    glColor3ub(137, 105, 67);
+    glRectf(X + 1 - 0.65 * scaleX, Y + 0.45 * scaleY, X + 1 - 0.8 * scaleX, Y + 0.65 * scaleY);
+    glPopMatrix();
+    // End neck
+
+    // Start left hand
+    glPushMatrix();
+    glColor3ub(133, 99, 64);
+    glTranslatef(X + 1 - 0.72 * scaleX, Y + 0.4 * scaleY, 0.0);
+    glRotatef(60, 0, 0, 1);
+    glRectf(1 - 0 * scaleX, 0, 1 - 0.2 * scaleX, 0.03 * scaleX);
+    glPopMatrix();
+    // End left hand
+
+    // Start head
+    glPushMatrix();
+    glColor3ub(133, 99, 64);
+    glRectf(X + 1 - 0.65 * scaleX, Y + 0.65 * scaleY, X - scaleX, Y + 0.8 * scaleY);
+    glPopMatrix();
+    // End head
+
+    // Start eye
+    glPushMatrix();
+    glColor3ub(13, 10, 7);
+    glRectf(X + 1 - 0.75 * scaleX, Y + 0.75 * scaleY, X + 1 - 0.8 * scaleX, Y + 0.78 * scaleY);
+    glPopMatrix();
+    // End eye
+
+    // Start Noise
+    glPushMatrix();
+    glColor3ub(64, 54, 49);
+    glRectf(X + 1 - 0.95 * scaleX, Y + 0.75 * scaleY, X + 1 - 1 * scaleX, Y + 0.8 * scaleY);
+    glPopMatrix();
+    // End Noise
+
+    // Start left ear
+    glPushMatrix();
+    glTranslatef(X + 1 - 0.725 * scaleX, Y + 0.8 * scaleY, 0.0);
+    glRotatef(230, 0, 0, 1);
+    glColor3ub(133, 99, 64);
+    glRectf(1 - 0 * scaleX, 0, 1 - 0.25 * scaleX, 0.05 * scaleY);
+    glPopMatrix();
+    // End left ear
+    glPopMatrix();
 }

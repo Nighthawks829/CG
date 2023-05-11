@@ -11,7 +11,7 @@
 #define PI 3.1415926535897932384626433832795
 #define FPS 60
 
-void drawGround()
+void drawGround(float dx,float dy)
 {
     glColor3ub(0, 154, 23);
     glRectf(0, 0, SCREENWIDTH, 0.6 * SCREENHEIGHT);
